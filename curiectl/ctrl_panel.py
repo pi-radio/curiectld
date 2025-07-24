@@ -37,7 +37,7 @@ class CurieWebPanel:
             start=0.4,
             end=4.4,
             fixed_start= 0.4,
-            fixed_end= 1.8,
+            fixed_end= 4.4,
             format="0.000000",
             disabled=False,
             name="Low LO Frequency (GHz)")
