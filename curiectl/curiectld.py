@@ -127,7 +127,7 @@ class CurieCtlService(rpyc.Service):
         return curie.get_high_LO()
 
     @rpyc.exposed
-    def get_low_LO(self, f):
+    def get_low_LO(self):
         return curie.get_low_LO()
     
     @rpyc.exposed
