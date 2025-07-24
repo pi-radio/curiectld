@@ -159,6 +159,16 @@ class CurieCtlService(rpyc.Service):
         curie.set_gain(trx, chan, v)
 
     @rpyc.exposed
+    def get_filter(self, trx, chan):
+        return curie.get_filter(trx, chan)
+        
+    @rpyc.exposed
+    def set_filter(self, trx, chan, v):
+        print(f"Setting {trx}{chan} filter to {v}")
+        curie.set_filter(trx, chan, v)
+
+        
+    @rpyc.exposed
     def get_gpio(self, chan):
         print(f"Get GPIO {chan} {curie.get_gpio(chan)}")
         return curie.get_gpio(chan)

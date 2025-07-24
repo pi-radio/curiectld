@@ -65,6 +65,7 @@ class CurieWebPanel:
             name="RX0 Gain (dB)")
 
         RX0_filter = pn.widgets.Select(
+            value=self.srv.get_filter('rx', 0),
             name="RX0 Filter",
             options=filter_options)
         
@@ -80,6 +81,7 @@ class CurieWebPanel:
             name="RX1 Gain (dB)")
         
         RX1_filter = pn.widgets.Select(
+            value=self.srv.get_filter('rx', 1),
             name="RX1 Filter",
             options=filter_options)
         
@@ -95,6 +97,7 @@ class CurieWebPanel:
             name="TX0 Gain (dB)")
 
         TX0_filter = pn.widgets.Select(
+            value=self.srv.get_filter('tx', 0),
             name="TX0 Filter",
             options=filter_options)
         
@@ -110,6 +113,7 @@ class CurieWebPanel:
             name="TX1 Gain (dB)")
         
         TX1_filter = pn.widgets.Select(
+            value=self.srv.get_filter('tx', 1),
             name="TX1 Filter",
             options=filter_options)
         
@@ -176,6 +180,11 @@ class CurieWebPanel:
         pn.bind(self.update_bias, channel=1, iq="I", v=TX1_I_bias, watch=True)
         pn.bind(self.update_bias, channel=1, iq="Q", v=TX1_Q_bias, watch=True)
 
+        pn.bind(self.update_filter, channel='rx0', v=RX0_filter, watch=True)
+        pn.bind(self.update_filter, channel='rx1', v=RX1_filter, watch=True)
+        pn.bind(self.update_filter, channel='tx0', v=TX0_filter, watch=True)
+        pn.bind(self.update_filter, channel='tx1', v=TX1_filter, watch=True)
+        
         pn.bind(self.update_gpio, channel=2, v=GPIO2, watch=True)
         pn.bind(self.update_gpio, channel=3, v=GPIO3, watch=True)
         pn.bind(self.update_gpio, channel=6, v=GPIO6, watch=True)
@@ -226,6 +235,10 @@ class CurieWebPanel:
         print(f"Updating gain for {channel} to {gain}...")
         self.srv.set_gain(channel[:2], int(channel[2]), gain)
 
+    def update_filter(self, channel, v):
+        print(f"Updating filter for {channel} to {v}...")
+        self.srv.set_filter(channel[:2], int(channel[2]), v)
+        
     def update_bias(self, channel, iq, v):
         print(f"Updating bias for TX{channel} {iq} to {v}...")
         self.srv.set_mixer_bias(channel, iq, v)

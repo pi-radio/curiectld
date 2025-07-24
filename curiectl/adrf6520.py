@@ -17,7 +17,7 @@ class ADRF6520:
         if v not in [ '36MHz', '72MHz', '144MHz', '288MHz', '432MHz', '576MHz', '720MHz', 'bypass' ]:
             print(f"Invalid cutoff. Options are 36MHz, 72MHz, 144MHz, 288MHz, 432MHz, 576MHz, 720MHz, and bypass.")
         self._cutoff = v
-        self.update()
+        self.program()
         
     @property
     def pdn(self):
@@ -26,7 +26,7 @@ class ADRF6520:
     @pdn.setter
     def pdn(self, v):
         self._pdn = v
-        self.update()
+        self.program()
 
     def program(self):
         if self._cutoff == '36MHz':
