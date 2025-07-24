@@ -1,3 +1,4 @@
+
 #!/usr/bwain/env python3
 import sys
 
@@ -53,7 +54,7 @@ class CurieWebPanel:
             name="High LO Frequency (GHz)")
 
         RX0_gain = pn.widgets.EditableFloatSlider(
-            value=32,
+            value=self.srv.get_gain('rx', 0),
             step=0.1,
             start=0,
             end=60.0,
@@ -68,7 +69,7 @@ class CurieWebPanel:
             options=filter_options)
         
         RX1_gain = pn.widgets.EditableFloatSlider(
-            value=32,
+            value=self.srv.get_gain('rx', 1),
             step=0.1,
             start=0,
             end=60.0,
@@ -83,7 +84,7 @@ class CurieWebPanel:
             options=filter_options)
         
         TX0_gain = pn.widgets.EditableFloatSlider(
-            value=32,
+            value=self.srv.get_gain('tx', 0),
             step=0.1,
             start=0,
             end=60.0,
@@ -98,7 +99,7 @@ class CurieWebPanel:
             options=filter_options)
         
         TX1_gain = pn.widgets.EditableFloatSlider(
-            value=32,
+            value=self.srv.get_gain('tx', 1),
             step=0.1,
             start=0,
             end=60.0,
