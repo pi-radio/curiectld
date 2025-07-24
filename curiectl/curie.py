@@ -31,6 +31,12 @@ class CurieConfig:
     I1_bias : float = 0.182
     Q1_bias : float = -0.048
 
+    
+    rx0_filter: str = 'bypass'
+    rx1_filter: str = 'bypass'
+    tx0_filter: str = 'bypass'
+    tx1_filter: str = 'bypass'
+        
     gpio_val : dict = field(default_factory=lambda: { 2: True, 3: True, 6: True })
 
 class CurieConfigSchema(Schema):
@@ -44,6 +50,12 @@ class CurieConfigSchema(Schema):
     rx1_gain = fields.Float()
     tx0_gain = fields.Float()
     tx1_gain = fields.Float()
+
+    rx0_filter = fields.String()
+    rx1_filter = fields.String()
+    tx0_filter = fields.String()
+    tx1_filter = fields.String()
+    
     gpio_val = fields.Dict(fields.Int(), fields.Bool())
 
     @post_load
@@ -299,6 +311,45 @@ class Curie:
         self._config.gpio_val[channel] = v
         self.save_config()
 
+    def get_filter(self, trx, channel):
+        assert trx in [ 'tx', 'rx' ]
+        assert channel in [ 0, 1]
+
+        if trx == 'rx':
+            if channel == 0:
+                return self._config.rx0_filter
+            else:
+                return self._config.rx1_filter
+        else:
+            if channel == 0:
+                return self._config.tx0_filter
+            else:
+                return self._config.tx1_filter
+
+    def set_filter(self, trx, channel, val):
+        assert val in [ '36MHz', '72MHz', '144MHz', '288MHz',
+                        '432MHz', '576MHz', '720MHz', 'bypass' ]
+        assert trx in [ 'tx', 'rx' ]
+        assert channel in [ 0, 1]
+
+        if trx == 'rx':
+            if channel == 0:
+                self._config.rx0_filter = val
+            else:
+                self._config.rx1_filter = val
+        else:
+            if channel == 0:
+                self._config.tx0_filter = val
+            else:
+                self._config.tx1_filter = val
+
+        
+        adrf = self.adrf[f"{trx}{channel}"]
+
+        adrf.cutoff = val
+        adrf.program()        
+        
+        
     def reset_lmx(self):
         self.LO_LO.reset()
         self.LO_HI.reset()
