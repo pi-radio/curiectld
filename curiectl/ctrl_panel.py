@@ -30,7 +30,8 @@ class CurieWebPanel:
         ]
 
   
-        low_LO = pn.widgets.EditableFloatSlider( value=1,
+        low_LO = pn.widgets.EditableFloatSlider(
+            value=self.srv.get_low_LO()/1e9,
             step=0.1,
             start=0.4,
             end=1.8,
@@ -41,7 +42,7 @@ class CurieWebPanel:
             name="Low LO Frequency (GHz)")
 
         high_LO = pn.widgets.EditableFloatSlider(
-            value=10,
+            value=self.srv.get_high_LO()/1e9,
             step=0.1,
             start=6.0,
             end=22.8,
