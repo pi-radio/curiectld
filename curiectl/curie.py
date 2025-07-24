@@ -194,7 +194,7 @@ class Curie:
 
         
     def set_low_LO(self, f):
-        assert f >= 400e6 and f <= 2e9
+        assert f >= 400e6 and f <= 4.4e9
 
         # TEMPORARY HACK FIX
         self.GPIO[2].write(True)

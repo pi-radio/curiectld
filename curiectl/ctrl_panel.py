@@ -35,7 +35,7 @@ class CurieWebPanel:
             value=self.srv.get_low_LO()/1e9,
             step=0.1,
             start=0.4,
-            end=1.8,
+            end=4.4,
             fixed_start= 0.4,
             fixed_end= 1.8,
             format="0.000000",
