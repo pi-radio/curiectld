@@ -137,7 +137,7 @@ class Curie:
         self.set_mixer_bias(0, 'I', self._config.I0_bias)
         self.set_mixer_bias(0, 'Q', self._config.Q0_bias)
         self.set_mixer_bias(1, 'I', self._config.I1_bias)
-        self.set_mixer_bias(1, 'Q', self._config.Q0_bias)
+        self.set_mixer_bias(1, 'Q', self._config.Q1_bias)
 
         self.set_gain('rx', 0, self._config.rx0_gain)
         self.set_gain('rx', 1, self._config.rx1_gain)
@@ -173,7 +173,7 @@ class Curie:
         return self._config.f_high_lo
     
     def set_high_LO(self, f):
-        assert f >= 6e9 and f <= 24e9
+        assert f >= 5.5e9 and f <= 24e9
 
         # TEMPORARY HACK FIX
         self.GPIO[2].write(True)

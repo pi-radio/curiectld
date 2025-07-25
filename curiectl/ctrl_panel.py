@@ -45,9 +45,9 @@ class CurieWebPanel:
         high_LO = pn.widgets.EditableFloatSlider(
             value=self.srv.get_high_LO()/1e9,
             step=0.1,
-            start=6.0,
+            start=5.5,
             end=22.8,
-            fixed_start= 6.0,
+            fixed_start= 5.5,
             fixed_end= 22.8,
             format="0.000000",
             disabled=False,
@@ -119,45 +119,45 @@ class CurieWebPanel:
         
         TX0_I_bias = pn.widgets.EditableFloatSlider(
             value=self.srv.get_mixer_bias(0, "I"),
-            step=0.001,
+            step=0.0001,
             start=-0.4,
             end=0.4,
             fixed_start= -0.4,
             fixed_end= 0.4,
-            format="0.000",
+            format="0.0000",
             disabled=False,
             name="TX0 I bias (V)")
         
         TX0_Q_bias = pn.widgets.EditableFloatSlider(
             value=self.srv.get_mixer_bias(0, "Q"),
-            step=0.001,
+            step=0.0001,
             start=-0.4,
             end=0.4,
             fixed_start= -0.4,
             fixed_end= 0.4,
-            format="0.000",
+            format="0.0000",
             disabled=False,
             name="TX0 Q bias (V)")
         
         TX1_I_bias = pn.widgets.EditableFloatSlider(
             value=self.srv.get_mixer_bias(1, "I"),
-            step=0.001,
+            step=0.0001,
             start=-0.4,
             end=0.4,
             fixed_start= -0.4,
             fixed_end= 0.4,
-            format="0.000",
+            format="0.0000",
             disabled=False,
             name="TX1 I bias (V)")
         
         TX1_Q_bias = pn.widgets.EditableFloatSlider(
             value=self.srv.get_mixer_bias(1, "Q"),
-            step=0.001,
+            step=0.0001,
             start=-0.4,
             end=0.4,
             fixed_start= -0.4,
             fixed_end= 0.4,
-            format="0.000",
+            format="0.0000",
             disabled=False,
             name="TX1 Q bias (V)")
 
